@@ -7,6 +7,6 @@
         <li><a href="{{ route('home') }}" class="hover:text-blue-700">Beranda</a></li>
         <li><a href="#" class="hover:text-blue-700">Tentang</a></li>
         <li><a href="#" class="hover:text-blue-700">Reservasi</a></li>
-        <li><a href="#" class="hover:text-blue-700">Akun</a></li>
+        <li><a href="{{ route('login') }}" class="hover:text-blue-700">Akun</a></li>
     </ul>
 </nav>
