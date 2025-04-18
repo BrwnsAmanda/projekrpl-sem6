@@ -9,6 +9,7 @@ export default {
             colors: {
                 primary: "#EAD16B", // warna kuning Prodifa
                 secondary: "#4FB581",
+                cream: "#FAF5E9",
             },
             fontFamily: {
                 poppins: ["Poppins", "sans-serif"],
