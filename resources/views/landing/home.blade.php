@@ -35,7 +35,7 @@
 
         <!-- Kolom Gambar -->
         <div class="aspect-square w-full max-w-md mx-auto">
-            <img src="{{ asset('images/aboutlab.jpeg') }}" alt="Tentang Laboratorium">
+            <img src="{{ asset('images/aboutlab.jpeg') }}" alt="Tentang Laboratorium"
                  class="object-cover w-full h-full rounded-lg shadow-lg">
         </div>
 
@@ -118,14 +118,6 @@
 </section>
 
 @include('components.footer')
-
-
-
-
-
-
-
-
 
 
 
