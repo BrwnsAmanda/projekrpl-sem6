@@ -17,3 +17,11 @@ Route::post('/login', [LoginController::class, 'login']);
 // Login Google
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('redirect.google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
+// Rujukan
+Route::prefix('/mitra')->group(function(){
+    Route::view('/', 'mitra.welcome');
+    Route::view('/rujukan', 'mitra.reservasimitra');
+    Route::get('/{id}', [RujukanController::class, 'show']);
+    Route::post('/create', [RujukanController::class, 'store'])->name('rujukan.store');
+});
