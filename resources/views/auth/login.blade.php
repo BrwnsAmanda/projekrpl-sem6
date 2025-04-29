@@ -7,13 +7,14 @@
 </head>
 <body class="bg-cream font-sans">
     <a href="{{ route('home') }}" class="absolute top-4 left-4 text-gray-600 hover:text-secondary flex items-center gap-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-             viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M15 19l-7-7 7-7" />
-        </svg>
-        <span class="text-sm">Kembali ke Beranda</span>
-    </a>
+<a href="{{ route('home') }}" class="absolute top-4 left-4 text-gray-600 hover:text-secondary flex items-center gap-1">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+         viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15 19l-7-7 7-7" />
+    </svg>
+    <span class="text-sm">Kembali ke Beranda</span>
+</a>
 
     <div class="min-h-screen grid grid-cols-1 md:grid-cols-2">
 
@@ -78,7 +79,7 @@
         </form>
 
         <p class="text-sm text-center mt-6">Belum punya akun?
-            <a href="#" class="text-secondary hover:underline font-medium">Daftar</a>
+            <a href="{{ route('register') }}" class="text-secondary hover:underline font-medium">Daftar</a>
         </p>
     </div>
 </div>
