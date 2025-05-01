@@ -23,7 +23,7 @@
 <!-- Tentang Laboratorium - 2 Kolom -->
 <section class="py-16 px-6 bg-secondary">
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        
+
         <!-- Kolom Teks -->
         <div>
             <h2 class="text-3xl font-semibold text-black mb-4">Tentang Laboratorium Prodifa</h2>
@@ -45,7 +45,7 @@
 <!-- Testimoni + Keunggulan -->
 <section class="py-16 px-6 bg-[#FAF7ED]">
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        
+
         <!-- Kolom Testimoni -->
         <div>
             <h2 class="text-2xl md:text-3xl font-bold text-black mb-6">Mengapa harus Laboratorium Prodifa?</h2>
@@ -92,7 +92,7 @@
 <!-- Kontak Informasi -->
 <section class="py-16 px-6 bg-secondary">
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-        
+
         <!-- Telepon -->
         <div class="bg-[#FAF7ED] rounded-xl p-6 text-center shadow-md">
             <div class="text-4xl mb-4">📞</div>
