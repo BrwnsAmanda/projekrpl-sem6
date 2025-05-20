@@ -13,6 +13,7 @@
 <body class="bg-white text-gray-800 font-poppins">
     @include('components.navbar')
 
+<<<<<<< HEAD
     <!-- Hero Section -->
     <section class="relative min-h-[90vh] bg-cover bg-center text-white overflow-hidden"
         style="background-image: url('{{ asset('images/lab-background.png') }}');">
@@ -29,6 +30,27 @@
                     Hubungi Kami
                 </a>
             </div>
+=======
+   <!-- Hero Section -->
+<section class="relative h-[80vh] bg-cover bg-center text-white" style="background-image: url('{{ asset('images/lab-background.png') }}');">
+    <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-start justify-center px-6 md:px-16">
+        <h1 class="text-3xl md:text-4xl font-bold mb-4">Selamat Datang di Layanan Website Laboratorium Prodifa</h1>
+        <p class="text-xl italic">"Accurate, Care, and Trust"</p>
+    </div>
+</section>
+
+<!-- Tentang Laboratorium - 2 Kolom -->
+<section class="py-16 px-6 bg-secondary">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+
+        <!-- Kolom Teks -->
+        <div>
+            <h2 class="text-3xl font-semibold text-black mb-4">Tentang Laboratorium Prodifa</h2>
+            <p class="text-lg text-black leading-relaxed">
+                Laboratorium Klinik Prodifa merupakan laboratorium kesehatan masyarakat yang berkomitmen untuk memberikan pelayanan pemeriksaan kesehatan yang akurat, cepat, dan terpercaya.
+                Terletak di Kabupaten Pangkajene dan Kepulauan, kami hadir sebagai mitra kesehatan yang siap mendukung peningkatan kualitas hidup masyarakat melalui layanan diagnostik yang berkualitas.
+            </p>
+>>>>>>> origin/main
         </div>
         <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
     </section>
@@ -59,6 +81,7 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
     </section>
 
     <!-- Jadwal Praktek Dokter Section -->
@@ -81,6 +104,24 @@
                         class="rounded-xl shadow w-full max-w-xs mb-4">
                     <span class="font-semibold text-lg text-secondary">Dokter Spesialis</span>
                 </div>
+=======
+
+    </div>
+</section>
+
+<!-- Testimoni + Keunggulan -->
+<section class="py-16 px-6 bg-[#FAF7ED]">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+        <!-- Kolom Testimoni -->
+        <div>
+            <h2 class="text-2xl md:text-3xl font-bold text-black mb-6">Mengapa harus Laboratorium Prodifa?</h2>
+            <div class="bg-primary p-6 rounded-xl shadow-md text-gray-800">
+                <p class="italic text-lg mb-4">
+                    "Sudah beberapa kali periksa di Prodifa, selalu puas dengan ketepatan hasil dan kebersihan tempatnya. Recommended!"
+                </p>
+                <p class="font-bold">– Andi Saputra, 45 tahun</p>
+>>>>>>> origin/main
             </div>
         </div>
     </section>
@@ -149,6 +190,7 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
     </section>
 
     <!-- Testimonials Section -->
@@ -190,6 +232,31 @@
                     </p>
                 </div>
             </div>
+=======
+
+    </div>
+
+<!-- Motto Kami -->
+<section class="py-12 px-6 bg-[#FAF7ED] text-center">
+    <h2 class="text-2xl md:text-3xl font-bold text-black mb-4">Motto Kami</h2>
+    <p class="text-xl italic font-semibold">“<span class="italic">Accurate, Care, and Trust</span>”</p>
+</section>
+</section>
+
+<!-- Kontak Informasi -->
+<section class="py-16 px-6 bg-secondary">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Telepon -->
+        <div class="bg-[#FAF7ED] rounded-xl p-6 text-center shadow-md">
+            <div class="text-4xl mb-4">📞</div>
+            <h3 class="text-2xl font-bold text-black mb-2">082–189–145–943</h3>
+            <p class="text-sm text-gray-700">
+                Silakan hubungi nomor berikut untuk<br>
+                konsultasi lebih lanjut dengan kami<br>
+                Laboratorium Prodifa
+            </p>
+>>>>>>> origin/main
         </div>
     </section>
 
@@ -224,6 +291,7 @@
         </div>
     </section>
 
+<<<<<<< HEAD
     @include('components.footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
@@ -233,6 +301,15 @@
             offset: 100
         });
     </script>
+=======
+    </div>
+</section>
+
+@include('components.footer')
+
+
+
+>>>>>>> origin/main
 </body>
 
 </html>

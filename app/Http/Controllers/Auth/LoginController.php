@@ -21,7 +21,11 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+<<<<<<< HEAD
             return redirect()->intended('/riwayat');
+=======
+            return redirect()->intended('/');
+>>>>>>> origin/main
         }
 
         return back()->withErrors(['email' => 'Email atau password salah.']);

@@ -5,6 +5,7 @@
     </div>
     <ul class="flex space-x-6 font-medium">
         <li><a href="{{ route('home') }}" class="hover:text-yellow-700">Beranda</a></li>
+<<<<<<< HEAD
         <li><a href="{{ route('tentang') }}" class="hover:text-yellow-700"> Tentang</a></li>
         <li><a href="{{ route('reservasi') }}" class="hover:text-yellow-700">Reservasi</a></li>
         @auth
@@ -18,5 +19,10 @@
         @else
             <li><a href="{{ route('login') }}" class="hover:text-yellow-700">Akun</a></li>
         @endauth
+=======
+        <li><a href="#" class="hover:text-yellow-700">Tentang</a></li>
+        <li><a href="{{ route('reservasi') }}" class="hover:text-yellow-700">Reservasi</a></li>
+        <li><a href="{{ route('login') }}" class="hover:text-yellow-700">Akun</a></li>
+>>>>>>> origin/main
     </ul>
 </nav>
