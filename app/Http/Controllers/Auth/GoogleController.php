@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-<<<<<<< HEAD
-use Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class GoogleController extends Controller
 {
@@ -19,52 +18,22 @@ class GoogleController extends Controller
     {
         $googleUser = Socialite::driver('google')->stateless()->user();
 
-        $user = User::firstOrCreate(
-            ['email' => $googleUser->getEmail()],
-            [
+        // Cek apakah user sudah pernah login dengan Google
+        $user = User::where('google_id', $googleUser->getId())->first();
+
+        if (!$user) {
+            // Jika belum ada, buat user baru
+            $user = User::create([
                 'name' => $googleUser->getName(),
+                'email' => $googleUser->getEmail(),
                 'google_id' => $googleUser->getId(),
-                'password' => bcrypt(uniqid()),
-                'role' => 'user',
-            ]
-        );
+                'password' => bcrypt(uniqid()), // random password
+                'role' => 'user', // default role
+            ]);
+        }
 
         Auth::login($user);
 
         return redirect('/riwayat');
-=======
-use Illuminate\Http\Request;
-use Laravel\Socialite\Facades\Socialite;
-use Auth;
-use App\Models\User;
-
-class GoogleController extends Controller
-{
-    public function redirectToGoogle(Request $request){
-        return Socialite::driver('google')->redirect();
-    }
-
-    public function handleGoogleCallback(Request $request){
-        $user = Socialite::driver('google')->user();
-
-        $findUser = User::where('google_id', $user->id)->first();
-
-        if(!is_null($findUser)) {
-            Auth::login($findUser);
-        } else {
-            $findUser = User::create([
-                'name' => $user->name,
-                'email' => $user->email,
-                'google_id' => $user->id,
-                'password' => encrypt('123456')
-            ]);
-            Auth::login($findUser);
-        }
-
-        return redirect('login');
-
->>>>>>> origin/main
     }
 }
-
-
