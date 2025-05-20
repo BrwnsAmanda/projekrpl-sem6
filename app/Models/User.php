@@ -21,12 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-<<<<<<< HEAD
         'google_id',
-        'role',
-=======
-        'google_id'
->>>>>>> origin/main
+        'role', // <- gabungan dari feature/mixed-changes
     ];
 
     /**
