@@ -3,6 +3,10 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\GoogleController;
+<<<<<<< HEAD
+use App\Http\Controllers\RiwayatController;
+=======
+>>>>>>> origin/main
 
 // Halaman utama
 Route::view('/', 'landing.home')->name('home');
@@ -18,6 +22,23 @@ Route::post('/register', [RegisterController::class, 'register']);
 
 
 // Login Google
+<<<<<<< HEAD
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
+// Rujukan
+Route::prefix('/mitra')->group(function(){
+    Route::view('/', 'mitra.welcome');
+    Route::view('/rujukan', 'mitra.reservasimitra');
+    Route::get('/{id}', [RujukanController::class, 'show']);
+    Route::post('/create', [RujukanController::class, 'store'])->name('rujukan.store');
+});
+
+Route::get('/riwayat', [App\Http\Controllers\RiwayatController::class, 'index'])
+    ->middleware('auth')
+    ->name('riwayat');
+//Route::get('/riwayat-preview', [RiwayatController::class, 'index']);
+=======
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('redirect.google');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
@@ -28,3 +49,4 @@ Route::prefix('/mitra')->group(function(){
     Route::get('/{id}', [RujukanController::class, 'show']);
     Route::post('/create', [RujukanController::class, 'store'])->name('rujukan.store');
 });
+>>>>>>> origin/main
