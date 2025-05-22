@@ -7,9 +7,11 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
     <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 </head>
 
-<body class="bg-cream font-sans font-poppins">
+<body class="bg-white text-gray-800 font-poppins">
     @include('components.navbar')
 
     <!-- Hero Section -->
@@ -60,7 +62,10 @@
             </svg>
             Formulir Reservasi
         </h2>
-        <form class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <form d="form-reservasi" action="{{ route('reservasi.store') }}" method="POST"
+      class="grid grid-cols-1 md:grid-cols-2 gap-8"
+      enctype="multipart/form-data">
+            @csrf
             <div>
                 <label for="nama" class="block font-semibold text-sm mb-1">Nama</label>
                 <input type="text" id="nama" name="nama" placeholder="Nama Lengkap"
@@ -85,7 +90,7 @@
                                     class="block px-4 py-2 hover:bg-gray-100">Perempuan</a></li>
                         </ul>
                     </div>
-                    <input type="hidden" name="jenis_kelamin" id="genderInput">
+                    <input type="hidden" name="jenis_kelamin" id="jenis_kelamin">
                 </div>
             </div>
             <div class="md:col-span-2">
@@ -155,7 +160,7 @@
                                 class="block px-4 py-2 hover:bg-gray-100">Lainnya</a></li>
                     </ul>
                 </div>
-                <input type="hidden" name="jenis" id="jenisInput">
+                <input type="hidden" name="jenis_pemeriksaan" id="jenis_pemeriksaan">
             </div>
             <!-- DETAIL PEMERIKSAAN -->
             <div class="relative md:col-span-2">
@@ -171,7 +176,7 @@
                 <div id="dropdownDetail" class="z-10 hidden bg-white rounded-lg shadow w-full mt-2">
                     <ul class="py-2 text-sm text-gray-700 list-none" id="detailOptions"></ul>
                 </div>
-                <input type="hidden" name="detail" id="detailInput">
+                <input type="hidden" name="detail_pemeriksaan" id="detail_pemeriksaan">
             </div>
             <!-- RUJUKAN DOKTER -->
             <div class="relative md:col-span-2">
@@ -188,11 +193,11 @@
                     <ul class="py-2 text-sm text-gray-700">
                         <li><a href="#" onclick="selectRujukan('Ya', event)"
                                 class="block px-4 py-2 hover:bg-gray-100">Ya</a></li>
-                        <li><a href="#" onclick="selectRujukan('tidak', event)"
+                        <li><a href="#" onclick="selectRujukan('Tidak', event)"
                                 class="block px-4 py-2 hover:bg-gray-100">Tidak</a></li>
                     </ul>
                 </div>
-                <input type="hidden" name="rujukan" id="rujukanInput">
+                <input type="hidden" name="punya_rujukan" id="punya_rujukan">
             </div>
             <div id="upload-rujukan" class="md:col-span-2 hidden">
                 <label for="surat_rujukan" class="block text-sm font-semibold text-gray-700 mb-2">Unggah Surat
@@ -214,10 +219,8 @@
                     Ajukan Reservasi
                 </button>
             </div>
-        </form>
-    </div>
 
-    <!-- Modal Konfirmasi -->
+            <!-- Modal Konfirmasi -->
     <div id="modal-konfirmasi" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 hidden">
         <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
             <div class="flex justify-center mb-4">
@@ -232,7 +235,7 @@
             <h3 class="text-xl font-bold mb-2 text-gray-900">Konfirmasi Pengajuan</h3>
             <p class="mb-6 text-gray-700">Apakah Anda sudah yakin untuk submit reservasi?</p>
             <div class="flex justify-center gap-4">
-                <button id="btn-konfirmasi-ya"
+                <button type="submit" id="btn-konfirmasi-ya"
                     class="bg-primary text-black font-semibold px-6 py-2 rounded hover:bg-primary/80 transition">Ya,
                     Submit</button>
                 <button id="btn-konfirmasi-batal"
@@ -260,6 +263,10 @@
                 class="bg-secondary text-white font-semibold px-8 py-2 rounded hover:bg-secondary/80 transition">OK</button>
         </div>
     </div>
+        </form>
+    </div>
+
+
 
     <script>
         const pemeriksaanMap = {
@@ -283,10 +290,10 @@
         };
 
         function updateDetail() {
-            const jenis = document.getElementById('jenisInput').value;
+            const jenis = document.getElementById('jenis_pemeriksaan').value;
             const detailList = document.getElementById('detailOptions');
             const detailText = document.getElementById('detailText');
-            const detailInput = document.getElementById('detailInput');
+            const detailInput = document.getElementById('detail_pemeriksaan');
 
             detailList.innerHTML = ''; // Kosongkan dulu isinya
             detailText.innerText = 'Pilih detail pemeriksaan';
@@ -306,14 +313,14 @@
         function selectGender(value) {
             event.preventDefault();
             document.getElementById('genderText').innerText = value;
-            document.getElementById('genderInput').value = value;
+            document.getElementById('jenis_kelamin').value = value;
             document.getElementById('dropdownGender').classList.add('hidden');
         }
 
         function selectJenis(value) {
             event.preventDefault();
             document.getElementById('jenisText').innerText = value;
-            document.getElementById('jenisInput').value = value;
+            document.getElementById('jenis_pemeriksaan').value = value;
 
             updateDetail(); // jangan lupa panggil ini supaya detail diperbarui
 
@@ -324,7 +331,7 @@
         function selectDetail(value) {
             event.preventDefault();
             document.getElementById('detailText').innerText = value;
-            document.getElementById('detailInput').value = value;
+            document.getElementById('detail_pemeriksaan').value = value;
             document.getElementById('dropdownDetail').classList.add('hidden');
         }
 
@@ -333,7 +340,7 @@
         function selectRujukan(value) {
             event.preventDefault();
             document.getElementById('rujukanText').innerText = value;
-            document.getElementById('rujukanInput').value = value;
+            document.getElementById('punya_rujukan').value = value;
             document.getElementById('dropdownRujukan').classList.add('hidden');
 
 
@@ -381,37 +388,41 @@
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('form');
-            if (!form) return;
-            const modalKonfirmasi = document.getElementById('modal-konfirmasi');
-            const modalNotif = document.getElementById('modal-notif');
-            const btnKonfirmasiYa = document.getElementById('btn-konfirmasi-ya');
-            const btnKonfirmasiBatal = document.getElementById('btn-konfirmasi-batal');
-            const btnNotifOk = document.getElementById('btn-notif-ok');
-            let submitConfirmed = false;
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('#form-reservasi'); // hanya form reservasi
+    if (!form) return;
 
-            form.addEventListener('submit', function(e) {
-                if (!submitConfirmed) {
-                    e.preventDefault();
-                    modalKonfirmasi.classList.remove('hidden');
-                }
-            });
+    const modalKonfirmasi = document.getElementById('modal-konfirmasi');
+    const modalNotif = document.getElementById('modal-notif');
+    const btnKonfirmasiYa = document.getElementById('btn-konfirmasi-ya');
+    const btnKonfirmasiBatal = document.getElementById('btn-konfirmasi-batal');
+    const btnNotifOk = document.getElementById('btn-notif-ok');
+    let submitConfirmed = false;
 
-            btnKonfirmasiYa.addEventListener('click', function() {
-                modalKonfirmasi.classList.add('hidden');
-                modalNotif.classList.remove('hidden');
-            });
-            btnKonfirmasiBatal.addEventListener('click', function() {
-                modalKonfirmasi.classList.add('hidden');
-            });
-            btnNotifOk.addEventListener('click', function() {
-                modalNotif.classList.add('hidden');
-                submitConfirmed = true;
-                form.submit();
-            });
-        });
-    </script>
+    form.addEventListener('submit', function(e) {
+        if (!submitConfirmed) {
+            e.preventDefault();
+            modalKonfirmasi.classList.remove('hidden');
+        }
+    });
+
+    btnKonfirmasiYa.addEventListener('click', function() {
+        modalKonfirmasi.classList.add('hidden');
+        modalNotif.classList.remove('hidden');
+    });
+
+    btnKonfirmasiBatal.addEventListener('click', function() {
+        modalKonfirmasi.classList.add('hidden');
+    });
+
+    btnNotifOk.addEventListener('click', function() {
+        modalNotif.classList.add('hidden');
+        submitConfirmed = true;
+        form.submit();
+    });
+});
+</script>
+
 
     @include('components.footer')
 </body>
