@@ -20,10 +20,20 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('/riwayat'); // arahkan ke halaman riwayat setelah login
-        }
+       if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
 
+        $user = Auth::user();
+
+        // Cek berdasarkan role
+        if ($user->role === 'admin') {
+            return redirect()->intended('/admin/dashboard');
+        } elseif ($user->role === 'mitra') {
+            return redirect()->intended(route('mitra.welcome'));
+        } elseif ($user->role === 'pasien') {
+            return redirect()->intended(route('riwayat')); // default untuk pasien/user biasa
+        }
+    }
         return back()->withErrors(['email' => 'Email atau password salah.']);
     }
 }

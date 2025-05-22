@@ -52,4 +52,14 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
+
+    public function reservasis()
+{
+    return $this->hasMany(Reservasi::class);
+}
+
+public function riwayats(){
+    return $this->hasMany(Riwayat::class);
+}
+
 }
