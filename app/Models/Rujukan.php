@@ -7,18 +7,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Rujukan extends Model
 {
-    use SoftDeletes;
-    
+
     protected $fillable = [
         'nama',
         'alamat',
         'tanggal_lahir',
         'nik',
         'jenis_kelamin',
-        'jadwal_pemeriksaan',
+        'tanggal_pemeriksaan',
         'jenis_pemeriksaan',
+        'detail_pemeriksaan',
         'no_telepon',
         'catatan_dokter',
         'file_rujukan',
+        'user_id'
     ];
 }
