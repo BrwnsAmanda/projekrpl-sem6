@@ -201,7 +201,7 @@
     </section>
 
     <!-- Kontak -->
-    <section class="py-24 px-6 bg-gray-50" id="contact">
+    <section class="py-24 px-6 bg-[#FAF7ED]" id="contact">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16" data-aos="fade-up">
                 <h2 class="text-4xl font-bold text-gray-900 mb-4">Hubungi Kami</h2>

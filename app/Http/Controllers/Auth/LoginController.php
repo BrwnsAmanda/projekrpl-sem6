@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User; // Import model User jika belum ada
 
 class LoginController extends Controller
 {
@@ -13,27 +16,30 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
+        public function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-       if (Auth::attempt($credentials)) {
-        $request->session()->regenerate();
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            $user = Auth::user();
 
-        $user = Auth::user();
+            // Cek berdasarkan role
+            if ($user->role === 'admin') {
+                return redirect()->intended('/admin/dashboard'); // Menggunakan path admin dari main
+            } elseif ($user->role === 'mitra' || $user->role === 'dokter') { // Menggabungkan 'mitra' & 'dokter' dan menggunakan named route dari main
+                return redirect()->intended(route('mitra.welcome'));
+            } elseif ($user->role === 'pasien') { // Menggunakan role 'pasien' dari main dan named route
+                return redirect()->intended(route('riwayat'));
+            }
 
-        // Cek berdasarkan role
-        if ($user->role === 'admin') {
-            return redirect()->intended('/admin/dashboard');
-        } elseif ($user->role === 'mitra') {
-            return redirect()->intended(route('mitra.welcome'));
-        } elseif ($user->role === 'pasien') {
-            return redirect()->intended(route('riwayat')); // default untuk pasien/user biasa
+            // Default fallback jika role tidak dikenali, mirip dengan logic miexed2
+            return redirect()->intended('/riwayat');
         }
-    }
+
+        // Jika login gagal
         return back()->withErrors(['email' => 'Email atau password salah.']);
     }
-}
