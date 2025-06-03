@@ -3,11 +3,17 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\ReservasiController;
+use App\Http\Controllers\ProfileController;
+
 
 // Halaman utama
 Route::view('/', 'landing.home')->name('home');
 Route::view('/tentang', 'landing.about')->name('tentang');
 Route::view('/reservasi', 'landing.reservasi')->name('reservasi');
+Route::post('/reservasi', [ReservasiController::class, 'store'])->name('reservasi.store');
+
+
 
 // Login & Register
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -25,12 +31,26 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 Route::prefix('/mitra')->group(function(){
     Route::view('/', 'mitra.welcome');
     Route::view('/rujukan', 'mitra.reservasimitra');
-    Route::get('/{id}', [RujukanController::class, 'show']);
-    Route::post('/create', [RujukanController::class, 'store'])->name('rujukan.store');
+    //Route::get('/{id}', [RujukanController::class, 'show']);
+    //Route::post('/create', [RujukanController::class, 'store'])->name('rujukan.store');
 });
 
 Route::get('/riwayat', [App\Http\Controllers\RiwayatController::class, 'index'])
     ->middleware('auth')
     ->name('riwayat');
 //Route::get('/riwayat-preview', [RiwayatController::class, 'index']);
+
+
+// Profile Routes
+
+
+// Profile Routes
+Route::middleware('auth')->group(function () {
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+});
+
+
+
 

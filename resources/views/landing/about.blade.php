@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laboratorium Prodifa</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
     @vite('resources/css/app.css')
 </head>
 
@@ -30,21 +31,21 @@
     <section class="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
         <!-- Kiri: 2 Gambar -->
         <div class="flex flex-col gap-8">
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden" data-aos="fade-right">
                 <img src="/images/img2.jpg" class="w-full h-56 object-cover border-b-4 border-primary">
             </div>
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden" data-aos="fade-right" data-aos-delay="100">
                 <img src="/images/img3.jpg" class="w-full h-56 object-cover border-b-4 border-secondary">
             </div>
         </div>
         <!-- Kanan: Visi & Misi Card -->
         <div class="flex flex-col gap-8">
-            <div class="rounded-2xl shadow-lg p-8 bg-primary/80">
+            <div class="rounded-2xl shadow-lg p-8 bg-primary/80" data-aos="fade-left">
                 <h2 class="text-2xl font-bold mb-4 text-gray-900">Visi</h2>
                 <p class="text-gray-900 mb-0">Menjadi Laboratorium Kesehatan yang mandiri, berkualitas, akurat, dan
                     terjangkau serta pusat rujukan fasilitas kesehatan di wilayah Pangkep dan sekitarnya.</p>
             </div>
-            <div class="rounded-2xl shadow-lg p-8 bg-secondary/70">
+            <div class="rounded-2xl shadow-lg p-8 bg-secondary/70" data-aos="fade-left" data-aos-delay="100">
                 <h2 class="text-2xl font-bold mb-4 text-gray-900">Misi</h2>
                 <ul class="list-disc pl-5 text-gray-900 space-y-4">
                     <li>Memberikan pelayanan laboratorium kesehatan yang akurat, terpercaya, dengan harga terjangkau
@@ -57,13 +58,35 @@
         </div>
     </section>
 
+    <!-- Struktur Organisasi -->
+    <section class="py-16 px-6 bg-[#FAF7ED]" id="struktur-organisasi">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div data-aos="fade-right">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4 flex items-center gap-3">
+                    <span>Struktur Organisasi</span>
+                </h2>
+                <p class="text-lg text-gray-700 mb-4">
+                    Laboratorium Klinik Prodifa memiliki struktur organisasi yang jelas untuk memastikan operasional
+                    yang efisien dan pelayanan berkualitas.
+                </p>
+                <p class="text-gray-600">
+                    Setiap divisi bekerja sama secara profesional demi mencapai visi dan misi laboratorium.
+                </p>
+            </div>
+            <div class="flex justify-center" data-aos="fade-left">
+                <img src="{{ asset('images/struktur-organisasi.jpeg') }}" alt="Struktur Organisasi Laboratorium Prodifa"
+                    class="rounded-xl shadow-lg w-full max-w-md border-4 border-primary">
+            </div>
+        </div>
+    </section>
+
     <!-- Layanan -->
     <section class="py-20 px-6 bg-white" id="layanan">
         <div class="max-w-7xl mx-auto text-center">
             <h2 class="text-3xl font-bold mb-8 text-gray-900">LAYANAN KAMI</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                 <!-- Hematologi -->
-                <div class="rounded-2xl shadow-lg p-8 bg-primary/80">
+                <div class="rounded-2xl shadow-lg p-8 bg-primary/80" data-aos="fade-up" data-aos-delay="100">
                     <div class="flex items-center mb-4">
                         <div class="bg-white rounded-full p-4 shadow w-16 h-16 flex items-center justify-center mr-4">
                             <img src="/images/kimia.png" alt="Hematologi" class="w-8 h-8">
@@ -73,7 +96,7 @@
                     <ul class="mt-4 space-y-2">
                         <li class="flex justify-between items-center border-b border-gray-600 pb-1">
                             <span>Darah Rutin</span>
-                            <span class="font-semibold text--gray-900">Rp100.000</span>
+                            <span class="font-semibold text-gray-900">Rp100.000</span>
                         </li>
                         <li class="flex justify-between items-center border-b border-gray-600 pb-1">
                             <span>Laju Endap Darah (LED)</span>
@@ -98,7 +121,7 @@
                     </ul>
                 </div>
                 <!-- Urinalisa -->
-                <div class="rounded-2xl shadow-lg p-8 bg-secondary/70">
+                <div class="rounded-2xl shadow-lg p-8 bg-secondary/70" data-aos="fade-up" data-aos-delay="200">
                     <div class="flex items-center mb-4">
                         <div class="bg-white rounded-full p-4 shadow w-16 h-16 flex items-center justify-center mr-4">
                             <img src="/images/mikrobiologi.png" alt="Urinalisa" class="w-8 h-8">
@@ -117,7 +140,7 @@
                     </ul>
                 </div>
                 <!-- Imunologi -->
-                <div class="rounded-2xl shadow-lg p-8 bg-primary/80">
+                <div class="rounded-2xl shadow-lg p-8 bg-primary/80" data-aos="fade-up" data-aos-delay="300">
                     <div class="flex items-center mb-4">
                         <div class="bg-white rounded-full p-4 shadow w-16 h-16 flex items-center justify-center mr-4">
                             <img src="/images/lainnya.png" alt="Imunologi" class="w-8 h-8">
@@ -140,7 +163,7 @@
                     </ul>
                 </div>
                 <!-- Kimia Klinik -->
-                <div class="rounded-2xl shadow-lg p-8 bg-secondary/70">
+                <div class="rounded-2xl shadow-lg p-8 bg-secondary/70" data-aos="fade-up" data-aos-delay="400">
                     <div class="flex items-center mb-4">
                         <div class="bg-white rounded-full p-4 shadow w-16 h-16 flex items-center justify-center mr-4">
                             <img src="/images/kimia.png" alt="Kimia Klinik" class="w-8 h-8">
@@ -170,35 +193,144 @@
                         </li>
                     </ul>
                 </div>
-                <!-- Parasitologi -->
-                <div class="rounded-2xl shadow-lg p-8 bg-primary/80">
+                <!-- Profil Lemak -->
+                <div class="rounded-2xl shadow-lg p-8 bg-primary/80" data-aos="fade-up" data-aos-delay="500">
                     <div class="flex items-center mb-4">
                         <div class="bg-white rounded-full p-4 shadow w-16 h-16 flex items-center justify-center mr-4">
                             <img src="/images/parasit.png" alt="Parasitologi" class="w-8 h-8">
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900">Parasitologi</h3>
+                        <h3 class="text-xl font-bold text-gray-900">Profil Lemak</h3>
                     </div>
-                    <ul class="list-disc pl-5 text-gray-900 text-sm space-y-1 text-left">
-                        <li>Feces Rutin</li>
-                        <li>DDR Malaria</li>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex justify-between items-center border-b border-gray-600 pb-1">
+                            <span>Cholesterol Total</span>
+                            <span class="font-semibold text-gray-900">Rp40.000</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-gray-600 pb-1">
+                            <span>HDL Cholesterol</span>
+                            <span class="font-semibold text-gray-900">Rp40.000</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-gray-600 pb-1">
+                            <span>LDL Cholesterol</span>
+                            <span class="font-semibold text-gray-900">Rp50.000</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>Trigliserida</span>
+                            <span class="font-semibold text-gray-900">Rp40.000</span>
+                        </li>
                     </ul>
                 </div>
-                <!-- Mikrobiologi -->
-                <div class="rounded-2xl shadow-lg p-8 bg-secondary/70">
+                <!-- Fungsi Hati -->
+                <div class="rounded-2xl shadow-lg p-8 bg-secondary/70" data-aos="fade-up" data-aos-delay="600">
                     <div class="flex items-center mb-4">
                         <div class="bg-white rounded-full p-4 shadow w-16 h-16 flex items-center justify-center mr-4">
                             <img src="/images/mikrobiologi.png" alt="Mikrobiologi" class="w-8 h-8">
                         </div>
-                        <h3 class="text-l font-bold text-gray-900">Mikrobiologi & Bakteriologi</h3>
+                        <h3 class="text-l font-bold text-gray-900">Fungsi Hati</h3>
                     </div>
-                    <ul class="list-disc pl-5 text-gray-900 text-sm space-y-1 text-left">
-                        <li>BTA (Mikroskop)</li>
-                        <li>BTA Cuka-Cuki</li>
-                        <li>Gram GO</li>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex justify-between items-center border-b border-gray-600 pb-1">
+                            <span>SGOT</span>
+                            <span class="font-semibold text-gray-900">Rp40.000</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-gray-600 pb-1">
+                            <span>SGPT</span>
+                            <span class="font-semibold text-gray-900">Rp40.000</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-gray-600 pb-1">
+                            <span>Bilirubin Total</span>
+                            <span class="font-semibold text-gray-900">Rp50.000</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-gray-600 pb-1">
+                            <span>Bilirubin Direk</span>
+                            <span class="font-semibold text-gray-900">Rp50.000</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-gray-600 pb-1">
+                            <span>Bilirubin Indirek</span>
+                            <span class="font-semibold text-gray-900">Rp50.000</span>
+                        </li>
+                        <li class="flex justify-between items-center ">
+                            <span>Albumin</span>
+                            <span class="font-semibold text-gray-900">Rp50.000</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Fungsi Ginjal -->
+                <div class="rounded-2xl shadow-lg p-8 bg-primary/80" data-aos="fade-up" data-aos-delay="700">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-white rounded-full p-4 shadow w-16 h-16 flex items-center justify-center mr-4">
+                            <img src="/images/parasit.png" alt="Parasitologi" class="w-8 h-8">
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">Fungsi Ginjal</h3>
+                    </div>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex justify-between items-center border-b border-gray-600 pb-1">
+                            <span>Ureum</span>
+                            <span class="font-semibold text-gray-900">Rp40.000</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-gray-600 pb-1">
+                            <span>Creatinin</span>
+                            <span class="font-semibold text-gray-900">Rp40.000</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>Asam Urat</span>
+                            <span class="font-semibold text-gray-900">Rp40.000</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Hepatitis -->
+                <div class="rounded-2xl shadow-lg p-8 bg-secondary/70" data-aos="fade-up" data-aos-delay="800">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-white rounded-full p-4 shadow w-16 h-16 flex items-center justify-center mr-4">
+                            <img src="/images/mikrobiologi.png" alt="Mikrobiologi" class="w-8 h-8">
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">Hepatitis</h3>
+                    </div>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex justify-between items-center border-b border-gray-600 pb-1">
+                            <span>HBsAg Kualitatif</span>
+                            <span class="font-semibold text-gray-900">Rp80.000</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-gray-600 pb-1">
+                            <span>Anti HBs Kuantitatif</span>
+                            <span class="font-semibold text-gray-900">Rp350.000</span>
+                        </li>
+                        <li class="flex justify-between items-center ">
+                            <span>Anti HCV Kualitatif</span>
+                            <span class="font-semibold text-gray-900">Rp250.000</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Infeksi Menular Seksual -->
+                <div class="rounded-2xl shadow-lg p-8 bg-primary/80" data-aos="fade-up" data-aos-delay="900">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-white rounded-full p-4 shadow w-16 h-16 flex items-center justify-center mr-4">
+                            <img src="/images/parasit.png" alt="Parasitologi" class="w-8 h-8">
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900">Infeksi Menular Seksual </h3>
+                    </div>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex justify-between items-center border-b border-gray-600 pb-1">
+                            <span>TPHA</span>
+                            <span class="font-semibold text-gray-900">Rp100.000</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-gray-600 pb-1">
+                            <span>VDRL</span>
+                            <span class="font-semibold text-gray-900">Rp100.000</span>
+                        </li>
+                        <li class="flex justify-between items-center border-b border-gray-600 pb-1">
+                            <span>HIV</span>
+                            <span class="font-semibold text-gray-900">Rp100.000</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <span>Gram GO</span>
+                            <span class="font-semibold text-gray-900">Rp100.000</span>
+                        </li>
                     </ul>
                 </div>
                 <!-- Lainnya -->
-                <div class="rounded-2xl shadow-lg p-8 bg-primary/80 col-span-1 sm:col-span-2 md:col-span-1">
+                <div class="rounded-2xl shadow-lg p-8 bg-secondary/70 col-span-1 sm:col-span-2 md:col-span-1"
+                    data-aos="fade-up" data-aos-delay="1000">
                     <div class="flex items-center mb-4">
                         <div class="bg-white rounded-full p-4 shadow w-16 h-16 flex items-center justify-center mr-4">
                             <img src="/images/lainnya.png" alt="Lainnya" class="w-8 h-8">
@@ -272,6 +404,14 @@
     </section>
 
     @include('components.footer')
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            offset: 100
+        });
+    </script>
 </body>
 
 </html>

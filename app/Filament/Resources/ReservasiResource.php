@@ -107,7 +107,15 @@ class ReservasiResource extends Resource
             ->visible(fn (callable $get) => $get('rujukan') === 'ya')
             ->directory('rujukan')
             ->acceptedFileTypes(['application/pdf', 'image/*'])
-            ->maxSize(1024), // dalam KB (1MB)
+            ->maxSize(1024),
+
+        FileUpload::make('hasil_pemeriksaan')
+            ->label('Upload Hasil Pemeriksaan')
+            ->visible(fn ($record) => $record && $record->user_id !== null)
+            ->directory('hasil-pemeriksaan')
+            ->acceptedFileTypes(['application/pdf', 'image/*'])
+            ->maxSize(2048),
+ // dalam KB (1MB)
     ]);
 }
 
@@ -115,6 +123,10 @@ class ReservasiResource extends Resource
 {
     return $table
         ->columns([
+            TextColumn::make('user.email')
+                ->label('Akun')
+                ->formatStateUsing(fn ($state, $record) => $record->user ? $record->user->email : 'Reservasi tanpa login'),
+
             TextColumn::make('nama')
                 ->label('Nama')
                 ->searchable()
