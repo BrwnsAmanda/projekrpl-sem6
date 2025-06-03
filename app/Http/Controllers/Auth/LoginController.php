@@ -16,7 +16,7 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
+        public function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -24,25 +24,22 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
             $user = Auth::user();
 
+            // Cek berdasarkan role
             if ($user->role === 'admin') {
-                return redirect()->intended('/admin'); // Arahkan admin ke panel admin
-            } elseif ($user->role === 'dokter') {
-                return redirect()->intended('/mitra'); // Arahkan dokter ke halaman mitra
-            } else {
-                return redirect()->intended('/riwayat'); // Default untuk pengguna biasa
+                return redirect()->intended('/admin/dashboard'); // Menggunakan path admin dari main
+            } elseif ($user->role === 'mitra' || $user->role === 'dokter') { // Menggabungkan 'mitra' & 'dokter' dan menggunakan named route dari main
+                return redirect()->intended(route('mitra.welcome'));
+            } elseif ($user->role === 'pasien') { // Menggunakan role 'pasien' dari main dan named route
+                return redirect()->intended(route('riwayat'));
             }
+
+            // Default fallback jika role tidak dikenali, mirip dengan logic miexed2
+            return redirect()->intended('/riwayat');
         }
 
+        // Jika login gagal
         return back()->withErrors(['email' => 'Email atau password salah.']);
     }
-
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('/');
-    }
-}

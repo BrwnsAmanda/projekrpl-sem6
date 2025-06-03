@@ -28,7 +28,7 @@ class GoogleController extends Controller
                 'email' => $googleUser->getEmail(),
                 'google_id' => $googleUser->getId(),
                 'password' => bcrypt(uniqid()), // random password
-                'role' => 'user', // default role
+                'role' => 'pasien', // default role
             ]);
         }
 

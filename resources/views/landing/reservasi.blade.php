@@ -7,9 +7,11 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
     <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 </head>
 
-<body class="bg-cream font-sans font-poppins">
+<body class="bg-white text-gray-800 font-poppins">
     @include('components.navbar')
 
     <div class="max-w-5xl mx-auto px-6 py-8">
@@ -44,6 +46,7 @@
             </svg>
             Formulir Reservasi
         </h2>
+        {{-- Menggabungkan form tag --}}
         <form id="form-reservasi" action="{{ route('reservasi.store') }}" method="POST" enctype="multipart/form-data"
             class="grid grid-cols-1 md:grid-cols-2 gap-8">
             @csrf
@@ -65,13 +68,14 @@
                     </button>
                     <div id="dropdownGender" class="z-10 hidden bg-white rounded-lg shadow w-full mt-2">
                         <ul class="py-2 text-sm text-gray-700">
+                            {{-- Menggunakan fungsi selectGender --}}
                             <li><a href="#" onclick="selectGender('Laki-laki', event)"
                                     class="block px-4 py-2 hover:bg-gray-100">Laki-laki</a></li>
                             <li><a href="#" onclick="selectGender('Perempuan', event)"
                                     class="block px-4 py-2 hover:bg-gray-100">Perempuan</a></li>
                         </ul>
                     </div>
-                    <input type="hidden" name="jenis_kelamin" id="genderInput">
+                    <input type="hidden" name="jenis_kelamin" id="jenis_kelamin"> {{-- Pastikan ID ini benar --}}
                 </div>
             </div>
             <div class="md:col-span-2">
@@ -118,7 +122,7 @@
                 <div id="dropdownJenis" class="z-10 hidden bg-white rounded-lg shadow w-full mt-2">
                     <ul class="py-2 text-sm text-gray-700" id="jenisOptions"></ul>
                 </div>
-                <input type="hidden" name="jenis" id="jenisInput">
+                <input type="hidden" name="jenis_pemeriksaan" id="jenis_pemeriksaan"> {{-- Pastikan ID ini benar --}}
             </div>
             <!-- DETAIL PEMERIKSAAN -->
             <div class="relative md:col-span-2">
@@ -133,7 +137,7 @@
                 <div id="dropdownDetail" class="z-10 hidden bg-white rounded-lg shadow w-full mt-2">
                     <ul class="py-2 text-sm text-gray-700 list-none" id="detailOptions"></ul>
                 </div>
-                <input type="hidden" name="detail" id="detailInput">
+                <input type="hidden" name="detail_pemeriksaan" id="detail_pemeriksaan"> {{-- Pastikan ID ini benar --}}
             </div>
             <!-- RUJUKAN DOKTER -->
             <div class="relative md:col-span-2">
@@ -147,13 +151,14 @@
                 </button>
                 <div id="dropdownRujukan" class="z-10 hidden bg-white rounded-lg shadow w-full mt-2">
                     <ul class="py-2 text-sm text-gray-700">
+                        {{-- Menggunakan fungsi selectRujukan --}}
                         <li><a href="#" onclick="selectRujukan('Ya', event)"
                                 class="block px-4 py-2 hover:bg-gray-100">Ya</a></li>
-                        <li><a href="#" onclick="selectRujukan('tidak', event)"
+                        <li><a href="#" onclick="selectRujukan('Tidak', event)"
                                 class="block px-4 py-2 hover:bg-gray-100">Tidak</a></li>
                     </ul>
                 </div>
-                <input type="hidden" name="rujukan" id="rujukanInput">
+                <input type="hidden" name="punya_rujukan" id="punya_rujukan"> {{-- Pastikan ID ini benar --}}
             </div>
             <div id="upload-rujukan" class="md:col-span-2 hidden">
                 <label for="surat_rujukan" class="block text-sm font-semibold text-gray-700 mb-2">Unggah Surat
@@ -170,93 +175,63 @@
                 </div>
             </div>
             <div class="md:col-span-2 flex justify-center pt-4">
+                {{-- Tombol submit, akan memicu modal konfirmasi --}}
                 <button type="submit"
                     class="bg-primary hover:bg-yellow-500 text-black font-bold px-8 py-3 rounded-lg shadow-lg transition-all duration-300">
                     Ajukan Reservasi
                 </button>
             </div>
+
+            <!-- Modal Konfirmasi -->
+            <div id="modal-konfirmasi" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 hidden">
+                <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-primary/20 rounded-full p-3">
+                            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" />
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
+                                    fill="none" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Konfirmasi Pengajuan</h3>
+                    <p class="mb-6 text-gray-700">Apakah Anda sudah yakin untuk submit reservasi?</p>
+                    <div class="flex justify-center gap-4">
+                        {{-- Tombol 'Ya, Submit' di modal akan memicu submit form --}}
+                        <button type="submit" id="btn-konfirmasi-ya"
+                            class="bg-primary text-black font-semibold px-6 py-2 rounded hover:bg-primary/80 transition">Ya,
+                            Submit</button>
+                        <button id="btn-konfirmasi-batal"
+                            class="bg-gray-200 text-gray-700 font-semibold px-6 py-2 rounded hover:bg-gray-300 transition">Batal</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Notifikasi -->
+            <div id="modal-notif" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 hidden">
+                <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-secondary/20 rounded-full p-3">
+                            <svg class="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01" />
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
+                                    fill="none" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900">Reservasi Diajukan</h3>
+                    <p class="mb-6 text-gray-700">Berkas Anda sedang diverifikasi.<br>Silakan tunggu admin menghubungi Anda.
+                    </p>
+                    {{-- Tombol OK di modal notifikasi --}}
+                    <button id="btn-notif-ok"
+                        class="bg-secondary text-white font-semibold px-8 py-2 rounded hover:bg-secondary/80 transition">OK</button>
+                </div>
+            </div>
         </form>
     </div>
 
-    <!-- Modal Konfirmasi -->
-    <div id="modal-konfirmasi" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 hidden">
-        <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
-            <div class="flex justify-center mb-4">
-                <div class="bg-primary/20 rounded-full p-3">
-                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" />
-                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
-                            fill="none" />
-                    </svg>
-                </div>
-            </div>
-            <h3 class="text-xl font-bold mb-2 text-gray-900">Konfirmasi Pengajuan</h3>
-            <p class="mb-6 text-gray-700">Apakah Anda sudah yakin untuk submit reservasi?</p>
-            <div class="flex justify-center gap-4">
-                <button id="btn-konfirmasi-ya"
-                    class="bg-primary text-black font-semibold px-6 py-2 rounded hover:bg-primary/80 transition">Ya,
-                    Submit</button>
-                <button id="btn-konfirmasi-batal"
-                    class="bg-gray-200 text-gray-700 font-semibold px-6 py-2 rounded hover:bg-gray-300 transition">Batal</button>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Notifikasi -->
-    <div id="modal-notif" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 hidden">
-        <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
-            <div class="flex justify-center mb-4">
-                <div class="bg-secondary/20 rounded-full p-3">
-                    <svg class="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 16h-1v-4h-1m1-4h.01" />
-                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
-                            fill="none" />
-                    </svg>
-                </div>
-            </div>
-            <h3 class="text-xl font-bold mb-2 text-gray-900">Reservasi Diajukan</h3>
-            <p class="mb-6 text-gray-700">Berkas Anda sedang diverifikasi.<br>Silakan tunggu admin menghubungi Anda.
-            </p>
-            <button id="btn-notif-ok"
-                class="bg-secondary text-white font-semibold px-8 py-2 rounded hover:bg-secondary/80 transition">OK</button>
-        </div>
-    </div>
-
     <script>
-        // Dropdown logic
-        document.addEventListener('DOMContentLoaded', function() {
-            // Gender
-            document.getElementById('dropdownGenderButton').onclick = function() {
-                document.getElementById('dropdownGender').classList.toggle('hidden');
-            };
-            // Jenis Pemeriksaan
-            document.getElementById('dropdownJenisButton').onclick = function() {
-                document.getElementById('dropdownJenis').classList.toggle('hidden');
-            };
-            // Detail Pemeriksaan
-            document.getElementById('dropdownDetailButton').onclick = function() {
-                document.getElementById('dropdownDetail').classList.toggle('hidden');
-            };
-            // Rujukan
-            document.getElementById('dropdownRujukanButton').onclick = function() {
-                document.getElementById('dropdownRujukan').classList.toggle('hidden');
-            };
-
-            // Jenis options
-            const jenisOptions = [
-                'Hematologi', 'Diabetes Melitus', 'Profil Lemak', 'Fungsi Hati', 'Fungsi Ginjal',
-                'Urinalisa', 'Hepatitis', 'Imunologi', 'Infeksi Menular Seksual', 'Lainnya'
-            ];
-            const jenisList = document.getElementById('jenisOptions');
-            jenisOptions.forEach(jenis => {
-                const li = document.createElement('li');
-                li.innerHTML =
-                    `<a href="#" onclick="selectJenis('${jenis}', event)" class="block px-4 py-2 hover:bg-gray-100">${jenis}</a>`;
-                jenisList.appendChild(li);
-            });
-        });
-
-        // Pemeriksaan map
+        // Data jenis pemeriksaan
         const pemeriksaanMap = {
             "Hematologi": ["Darah Rutin", "Laju Endap Darah (LED)", "Waktu Perdarahan (BT)", "Waktu Pembekuan (CT)",
                 "Golongan Darah", "Golongan Darah + Rhesus"
@@ -277,29 +252,37 @@
             ]
         };
 
+        // Fungsi untuk memilih jenis kelamin
         function selectGender(value, event) {
-            event.preventDefault();
+            event.preventDefault(); // Mencegah default behavior link
             document.getElementById('genderText').innerText = value;
-            document.getElementById('genderInput').value = value;
+            document.getElementById('jenis_kelamin').value = value; // Menggunakan ID input hidden yang benar
             document.getElementById('dropdownGender').classList.add('hidden');
         }
 
+        // Fungsi untuk memilih jenis pemeriksaan
         function selectJenis(value, event) {
-            event.preventDefault();
+            event.preventDefault(); // Mencegah default behavior link
             document.getElementById('jenisText').innerText = value;
-            document.getElementById('jenisInput').value = value;
-            updateDetail();
+            document.getElementById('jenis_pemeriksaan').value = value; // Menggunakan ID input hidden yang benar
+
+            updateDetail(); // Perbarui opsi detail berdasarkan jenis yang dipilih
+
             document.getElementById('dropdownJenis').classList.add('hidden');
         }
 
+        // Fungsi untuk memperbarui opsi detail pemeriksaan
         function updateDetail() {
-            const jenis = document.getElementById('jenisInput').value;
+            const jenis = document.getElementById('jenis_pemeriksaan').value; // Mengambil nilai dari input hidden jenis
             const detailList = document.getElementById('detailOptions');
             const detailText = document.getElementById('detailText');
-            const detailInput = document.getElementById('detailInput');
-            detailList.innerHTML = '';
-            detailText.innerText = 'Pilih detail pemeriksaan';
-            detailInput.value = '';
+            const detailInput = document.getElementById('detail_pemeriksaan'); // Menggunakan ID input hidden yang benar
+
+            detailList.innerHTML = ''; // Kosongkan dulu isinya
+            detailText.innerText = 'Pilih detail pemeriksaan'; // Reset teks tampilan
+            detailInput.value = ''; // Reset nilai input hidden detail
+
+            // Isi opsi detail jika jenis pemeriksaan ada dalam map
             if (pemeriksaanMap[jenis]) {
                 pemeriksaanMap[jenis].forEach(item => {
                     const li = document.createElement('li');
@@ -310,27 +293,30 @@
             }
         }
 
+        // Fungsi untuk memilih detail pemeriksaan
         function selectDetail(value, event) {
-            event.preventDefault();
+            event.preventDefault(); // Mencegah default behavior link
             document.getElementById('detailText').innerText = value;
-            document.getElementById('detailInput').value = value;
+            document.getElementById('detail_pemeriksaan').value = value; // Menggunakan ID input hidden yang benar
             document.getElementById('dropdownDetail').classList.add('hidden');
         }
 
+        // Fungsi untuk memilih punya rujukan atau tidak
         function selectRujukan(value, event) {
-            event.preventDefault();
+            event.preventDefault(); // Mencegah default behavior link
             document.getElementById('rujukanText').innerText = value;
-            document.getElementById('rujukanInput').value = value;
+            document.getElementById('punya_rujukan').value = value; // Menggunakan ID input hidden yang benar
             document.getElementById('dropdownRujukan').classList.add('hidden');
             const upload = document.getElementById('upload-rujukan');
             if (value === 'Ya') {
                 upload.classList.remove('hidden');
             } else {
                 upload.classList.add('hidden');
-                removePreview();
+                removePreview(); // Hapus preview jika memilih 'Tidak'
             }
         }
 
+        // Fungsi untuk menampilkan preview file rujukan
         function previewFile(event) {
             const fileInput = event.target;
             const file = fileInput.files[0];
@@ -340,17 +326,19 @@
                 fileNameSpan.textContent = file.name;
                 previewContainer.classList.remove('hidden');
             } else {
-                removePreview();
+                removePreview(); // Jika tidak ada file, sembunyikan preview
             }
         }
 
+        // Fungsi untuk menghapus preview file rujukan
         function removePreview() {
             const fileInput = document.getElementById('surat_rujukan');
             const previewContainer = document.getElementById('preview-container');
-            fileInput.value = "";
+            fileInput.value = ""; // Mengosongkan input file
             previewContainer.classList.add('hidden');
         }
 
+        // Fungsi untuk validasi input hanya angka
         function validateNumberOnly(input, warningId) {
             const warning = document.getElementById(warningId);
             const cleaned = input.value.replace(/\D/g, '');
@@ -362,10 +350,40 @@
             input.value = cleaned;
         }
 
-        // Modal logic
+        // Inisialisasi dropdown dan logika modal setelah DOM siap
         document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('form-reservasi');
-            if (!form) return;
+            // Inisialisasi dropdown click listeners
+            document.getElementById('dropdownGenderButton').onclick = function() {
+                document.getElementById('dropdownGender').classList.toggle('hidden');
+            };
+            document.getElementById('dropdownJenisButton').onclick = function() {
+                document.getElementById('dropdownJenis').classList.toggle('hidden');
+            };
+            document.getElementById('dropdownDetailButton').onclick = function() {
+                document.getElementById('dropdownDetail').classList.toggle('hidden');
+            };
+            document.getElementById('dropdownRujukanButton').onclick = function() {
+                document.getElementById('dropdownRujukan').classList.toggle('hidden');
+            };
+
+            // Isi opsi jenis pemeriksaan saat DOM siap
+            const jenisOptionsData = [
+                'Hematologi', 'Diabetes Melitus', 'Profil Lemak', 'Fungsi Hati', 'Fungsi Ginjal',
+                'Urinalisa', 'Hepatitis', 'Imunologi', 'Infeksi Menular Seksual', 'Lainnya'
+            ];
+            const jenisList = document.getElementById('jenisOptions');
+            jenisOptionsData.forEach(jenis => {
+                const li = document.createElement('li');
+                // Menggunakan fungsi selectJenis dengan event
+                li.innerHTML =
+                    `<a href="#" onclick="selectJenis('${jenis}', event)" class="block px-4 py-2 hover:bg-gray-100">${jenis}</a>`;
+                jenisList.appendChild(li);
+            });
+
+             // Logika Modal
+            const form = document.getElementById('form-reservasi'); // Pastikan ID form sudah benar
+            if (!form) return; // Keluar jika form tidak ditemukan
+
             const modalKonfirmasi = document.getElementById('modal-konfirmasi');
             const modalNotif = document.getElementById('modal-notif');
             const btnKonfirmasiYa = document.getElementById('btn-konfirmasi-ya');
@@ -373,6 +391,7 @@
             const btnNotifOk = document.getElementById('btn-notif-ok');
             let submitConfirmed = false;
 
+            // Mencegah submit form default, tampilkan modal konfirmasi
             form.addEventListener('submit', function(e) {
                 if (!submitConfirmed) {
                     e.preventDefault();
@@ -380,17 +399,23 @@
                 }
             });
 
+            // Tombol 'Ya, Submit' di modal konfirmasi
             btnKonfirmasiYa.addEventListener('click', function() {
                 modalKonfirmasi.classList.add('hidden');
-                modalNotif.classList.remove('hidden');
+                modalNotif.classList.remove('hidden'); // Tampilkan modal notifikasi setelah konfirmasi
+                // Tidak langsung submit di sini, submit dilakukan setelah klik OK di modal notifikasi
             });
+
+            // Tombol 'Batal' di modal konfirmasi
             btnKonfirmasiBatal.addEventListener('click', function() {
                 modalKonfirmasi.classList.add('hidden');
             });
+
+            // Tombol 'OK' di modal notifikasi
             btnNotifOk.addEventListener('click', function() {
                 modalNotif.classList.add('hidden');
-                submitConfirmed = true;
-                form.submit();
+                submitConfirmed = true; // Set flag agar submit tidak dicegat lagi
+                form.submit(); // Lanjutkan submit form
             });
         });
     </script>
