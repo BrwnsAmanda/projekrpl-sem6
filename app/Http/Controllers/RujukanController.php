@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Rujukan;
+use Illuminate\Support\Facades\Auth;
 
 class RujukanController extends Controller
 {
@@ -13,7 +14,7 @@ class RujukanController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $penerima
+            'data' => $rujukan
         ], 201);
     }
 
@@ -47,5 +48,24 @@ class RujukanController extends Controller
     Rujukan::create($validated);
 
     return back()->with('success', 'Rujukan berhasil dibuat.');
+    }
+
+    /**
+     * Display a listing of the user's referrals.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function riwayatRujukan()
+    {
+        // Mengambil user yang sedang login
+        $user = Auth::user();
+
+        // Mengambil data rujukan yang diajukan oleh user ini.
+        // ASUMSI: Ada model App\Models\Rujukan dan kolom 'user_id' pada tabel rujukans.
+        // Anda mungkin perlu menyesuaikan query ini berdasarkan struktur database Anda.
+        $rujukans = \App\Models\Rujukan::where('user_id', $user->id)->get();
+
+        // Mengirim data rujukan ke view riwayat_rujukan.blade.php
+        return view('mitra.riwayat_rujukan', compact('rujukans'));
     }
 }

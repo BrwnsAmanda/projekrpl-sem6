@@ -51,6 +51,33 @@
             class="grid grid-cols-1 md:grid-cols-2 gap-8">
             @csrf
 
+            {{-- Display Validation Errors --}}
+            @if ($errors->any())
+                <div class="md:col-span-2 mb-4">
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                        role="alert">
+                        <strong class="font-bold">Oops!</strong>
+                        <span class="block sm:inline">Ada beberapa masalah dengan input Anda:</span>
+                        <ul class="mt-2 list-disc list-inside">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
+
+            {{-- Display Success Message --}}
+            @if (session('success'))
+                <div class="md:col-span-2 mb-4">
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+                        role="alert">
+                        <strong class="font-bold">Sukses!</strong>
+                        <span class="block sm:inline">{{ session('success') }}</span>
+                    </div>
+                </div>
+            @endif
+
             <div>
                 <label for="nama" class="block font-semibold text-sm mb-1">Nama</label>
                 <input type="text" id="nama" name="nama" placeholder="Nama Lengkap"
@@ -187,8 +214,10 @@
                 <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
                     <div class="flex justify-center mb-4">
                         <div class="bg-primary/20 rounded-full p-3">
-                            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" />
+                            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3" />
                                 <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
                                     fill="none" />
                             </svg>
@@ -211,7 +240,8 @@
                 <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
                     <div class="flex justify-center mb-4">
                         <div class="bg-secondary/20 rounded-full p-3">
-                            <svg class="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-8 h-8 text-secondary" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M13 16h-1v-4h-1m1-4h.01" />
                                 <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
@@ -220,7 +250,8 @@
                         </div>
                     </div>
                     <h3 class="text-xl font-bold mb-2 text-gray-900">Reservasi Diajukan</h3>
-                    <p class="mb-6 text-gray-700">Berkas Anda sedang diverifikasi.<br>Silakan tunggu admin menghubungi Anda.
+                    <p class="mb-6 text-gray-700">Berkas Anda sedang diverifikasi.<br>Silakan tunggu admin menghubungi
+                        Anda.
                     </p>
                     {{-- Tombol OK di modal notifikasi --}}
                     <button id="btn-notif-ok"
@@ -380,7 +411,7 @@
                 jenisList.appendChild(li);
             });
 
-             // Logika Modal
+            // Logika Modal
             const form = document.getElementById('form-reservasi'); // Pastikan ID form sudah benar
             if (!form) return; // Keluar jika form tidak ditemukan
 

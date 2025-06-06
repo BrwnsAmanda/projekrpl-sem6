@@ -61,6 +61,10 @@ Route::middleware('auth')->group(function () {
         Route::view('/', 'mitra.welcome')->name('mitra.welcome'); // Named route dari main
         Route::view('/rujukan', 'mitra.reservasimitra')->name('mitra.rujukan'); // Named route dari main
 
+        // === Rute BARU untuk Riwayat Rujukan Mitra ===
+        Route::get('/rujukan/riwayat', [RujukanController::class, 'riwayatRujukan'])->name('mitra.rujukan.riwayat');
+        // ============================================
+
         // Rute untuk Rujukan/Reservasi Mitra (Dari main, diaktifkan)
         // Sesuaikan jika show/store perlu middleware tambahan
         Route::get('/rujukan/{id}', [RujukanController::class, 'show'])->name('mitra.rujukan.show');
