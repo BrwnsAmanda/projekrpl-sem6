@@ -8,7 +8,8 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
     <script src="https://unpkg.com/flowbite@1.4.1/dist/flowbite.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
 </head>
 
@@ -26,7 +27,8 @@
                 </div>
             </div>
             <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Rujukan Pemeriksaan</h1>
-            <p class="text-gray-700">Ajukan rujukan pemeriksaan dari fasilitas kesehatan atau dokter yang bekerja sama.</p>
+            <p class="text-gray-700">Ajukan rujukan pemeriksaan dari fasilitas kesehatan atau dokter yang bekerja sama.
+            </p>
         </div>
     </section>
 
@@ -38,7 +40,8 @@
             </svg>
             Formulir Rujukan Pemeriksaan
         </h2>
-        <form action="{{ route('rujukan.store') }}" method="POST" enctype="multipart/form-data" id="rujukanForm" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <form action="{{ route('mitra.rujukan.store') }}" method="POST" enctype="multipart/form-data" id="rujukanForm"
+            class="grid grid-cols-1 md:grid-cols-2 gap-8">
             @csrf
 
             <div>
@@ -154,7 +157,7 @@
                 <input type="hidden" name="detail_pemeriksaan" id="detail_pemeriksaan">
             </div>
 
-           <div id="upload-rujukan" class="md:col-span-2">
+            <div id="upload-rujukan" class="md:col-span-2">
                 <label for="surat_rujukan" class="block text-sm font-semibold text-gray-700 mb-2">Unggah Surat
                     Rujukan</label>
                 <input type="file" id="surat_rujukan" name="surat_rujukan"
@@ -200,7 +203,7 @@
             }
         });
 
-         const pemeriksaanMap = {
+        const pemeriksaanMap = {
             "Hematologi": ["Darah Rutin", "Laju Endap Darah (LED)", "Waktu Perdarahan (BT)", "Waktu Pembekuan (CT)",
                 "Golongan Darah", "Golongan Darah + Rhesus"
             ],
