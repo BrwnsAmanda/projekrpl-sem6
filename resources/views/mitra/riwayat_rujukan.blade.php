@@ -73,7 +73,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                     {{ $rujukan->tanggal_lahir }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                    {{ $rujukan->tanggal_pemeriksaan }}</td>
+                                    {{ $rujukan->jadwal_pemeriksaan }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                     {{ $rujukan->jenis_pemeriksaan }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
