@@ -185,7 +185,7 @@
                                 class="block px-4 py-2 hover:bg-gray-100">Tidak</a></li>
                     </ul>
                 </div>
-                <input type="hidden" name="punya_rujukan" id="punya_rujukan"> {{-- Pastikan ID ini benar --}}
+                <input type="hidden" name="rujukan" id="rujukan"> {{-- Pastikan ID ini benar --}}
             </div>
             <div id="upload-rujukan" class="md:col-span-2 hidden">
                 <label for="surat_rujukan" class="block text-sm font-semibold text-gray-700 mb-2">Unggah Surat
@@ -336,7 +336,7 @@
         function selectRujukan(value, event) {
             event.preventDefault(); // Mencegah default behavior link
             document.getElementById('rujukanText').innerText = value;
-            document.getElementById('punya_rujukan').value = value; // Menggunakan ID input hidden yang benar
+            document.getElementById('rujukan').value = value; // Menggunakan ID input hidden yang benar
             document.getElementById('dropdownRujukan').classList.add('hidden');
             const upload = document.getElementById('upload-rujukan');
             if (value === 'Ya') {
