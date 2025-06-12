@@ -23,7 +23,7 @@ class ReservasiController extends Controller
             'jadwal_pemeriksaan' => 'required|date|after_or_equal:today',
             'jenis_pemeriksaan' => 'required|string',
             'detail_pemeriksaan' => 'required|string',
-            'punya_rujukan' => 'required|in:Ya,Tidak',
+            'rujukan' => 'required|in:Ya,Tidak',
             'surat_rujukan' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048'
         ]);
 
@@ -47,8 +47,8 @@ class ReservasiController extends Controller
             'jadwal_pemeriksaan' => $validated['jadwal_pemeriksaan'],
             'jenis_pemeriksaan' => $validated['jenis_pemeriksaan'],
             'detail_pemeriksaan' => $validated['detail_pemeriksaan'],
-            'punya_rujukan' => $validated['punya_rujukan'],
-            'surat_rujukan_path' => $filePath,
+            'rujukan' => $validated['rujukan'],
+            'surat_rujukan' => $filePath,
             'user_id' => Auth::check() ? Auth::id() : null,
             'harga' => $harga ?? 0,
             'status' => 'Menunggu Pembayaran'
@@ -58,7 +58,7 @@ class ReservasiController extends Controller
         Riwayat::create([
             'reservasi_id' => $reservasi->id,
             'harga' => $harga ?? 0,
-            'status_pembayaran' => 'Belum Dibayar',
+            'status' => 'Belum Dibayar',
             'invoice_number' => 'INV-' . strtoupper(uniqid()),
             'hasil_pemeriksaan' => null,
         ]);
@@ -71,4 +71,4 @@ class ReservasiController extends Controller
         $reservasis = auth()->user()->reservasis()->latest()->get();
         return view('reservasi.index', compact('reservasis'));
     }
-} 
+}
