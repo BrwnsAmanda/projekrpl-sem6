@@ -189,25 +189,25 @@
         </div>
     </div>
     <!-- Modal Notifikasi -->
-    <div id="modal-notif" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 hidden">
-        <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
-            <div class="flex justify-center mb-4">
-                <div class="bg-secondary/20 rounded-full p-3">
-                    <svg class="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 16h-1v-4h-1m1-4h.01" />
-                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
-                            fill="none" />
-                    </svg>
-                </div>
+<div id="modal-notif" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 hidden">
+    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
+        <div class="flex justify-center mb-4">
+            <div class="bg-secondary/20 rounded-full p-3">
+                <svg class="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01" />
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
+                        fill="none" />
+                </svg>
             </div>
-            <h3 class="text-xl font-bold mb-2 text-gray-900">Rujukan Berhasil Dikirim</h3>
-            <p class="mb-6 text-gray-700">Rujukan Anda telah berhasil dikirim.<br>Silakan tunggu untuk verifikasi.
-            </p>
-            <button id="btn-notif-ok"
-                class="bg-secondary text-white font-semibold px-8 py-2 rounded hover:bg-secondary/80 transition">OK</button>
         </div>
+        <h3 class="text-xl font-bold mb-2 text-gray-900">Rujukan Berhasil Dikirim</h3>
+        <p class="mb-6 text-gray-700">Rujukan Anda telah berhasil dikirim.
+        <button id="btn-notif-ok"
+            class="bg-secondary text-white font-semibold px-8 py-2 rounded hover:bg-secondary/80 transition">OK</button>
     </div>
+</div>
+
 
     @include('components.footer')
 
