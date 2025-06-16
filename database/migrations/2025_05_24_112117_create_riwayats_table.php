@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('reservasi_id')->nullable()->constrained('reservasis')->after('id');
             $table->string('harga');
-            $table->string('status_pembayaran')->default('Belum Dibayar');
+            $table->string('status')->default('Belum Dibayar');
             $table->string('invoice_number')->unique();
             $table->string('hasil_pemeriksaan')->nullable();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('riwayats');
     }
 };

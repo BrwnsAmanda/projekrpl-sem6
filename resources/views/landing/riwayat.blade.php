@@ -98,12 +98,12 @@
                                 <div class="flex justify-between items-center mt-4">
                                     {{-- Harga dari model Riwayat --}}
                                     <div class="font-bold text-lg">Total:
-                                        Rp{{ number_format($riwayat->harga ?? 0, 0, ',', '.') }}</div>
+                                        Rp{{ number_format($riwayat->reservasi->harga ?? 0, 0, ',', '.') }}</div>
                                     {{-- Status pembayaran dari model Riwayat --}}
-                                    <div
-                                        class="px-3 py-1 rounded {{ ($riwayat->status_pembayaran ?? '') == 'Lunas' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
-                                        {{ $riwayat->status_pembayaran ?? 'Belum Dibayar' }}
-                                    </div>
+<div
+    class="px-3 py-1 rounded {{ ($riwayat->reservasi->status ?? '') == 'Lunas' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
+    {{ $riwayat->reservasi->status ?? 'Menunggu Pembayaran' }}
+</div>
                                 </div>
                             </div>
                             {{-- Tombol Unduh PDF/JPG dari miexed2 --}}

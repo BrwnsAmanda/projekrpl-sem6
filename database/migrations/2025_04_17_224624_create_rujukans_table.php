@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('rujukans', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->string('alamat');
             $table->date('tanggal_lahir');
             $table->string('nik');
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
-            $table->dateTime('jadwal_pemeriksaan');
+            $table->date('jadwal_pemeriksaan');
             $table->string('jenis_pemeriksaan');
+            $table->text('detail_pemeriksaan');
             $table->string('no_telepon');
             $table->text('catatan_dokter')->nullable();
             $table->string('file_rujukan')->nullable();

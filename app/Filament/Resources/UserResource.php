@@ -47,11 +47,12 @@ class UserResource extends Resource
                 Select::make('role')
                     ->options([
                         'admin' => 'Admin',
+                        'mitra' => 'Mitra',
                         'dokter' => 'Dokter',
-                        'user' => 'Pengguna Biasa',
+                        'pasien' => 'Pengguna Biasa',
                     ])
                     ->required()
-                    ->default('user'), // Default role saat tambah user baru
+                    ->default('pasien'), // Default role saat tambah user baru
                 // Jika Anda ingin menampilkan/mengedit email_verified_at
                 // DateTimePicker::make('email_verified_at')
                 //    ->label('Email Verified At')

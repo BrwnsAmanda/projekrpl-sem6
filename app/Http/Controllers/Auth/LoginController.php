@@ -29,7 +29,7 @@ class LoginController extends Controller
 
             // Cek berdasarkan role
             if ($user->role === 'admin') {
-                return redirect()->intended('/admin/dashboard'); // Menggunakan path admin dari main
+                return redirect()->intended('/admin'); // Menggunakan path admin dari main
             } elseif ($user->role === 'mitra' || $user->role === 'dokter') {
                 return redirect()->intended(route('mitra.welcome'));
             } elseif ($user->role === 'pasien') {
@@ -47,12 +47,13 @@ class LoginController extends Controller
     // Menambahkan method logout
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('web')->logout();
 
-        $request->session()->invalidate();
+        // Instead of invalidating the entire session, just remove the web guard session key
+        $request->session()->forget('login_web_'.md5(config('app.key')));
 
         $request->session()->regenerateToken();
 
         return redirect('/');
     }
-} 
+}

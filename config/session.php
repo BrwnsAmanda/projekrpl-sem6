@@ -134,6 +134,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Custom Session Cookie for Admin Guard
+    |--------------------------------------------------------------------------
+    |
+    | To separate admin and user sessions, define a different cookie name for
+    | the admin guard session. This can be set in the .env file as well.
+    |
+    */
+
+    'admin_cookie' => env(
+        'SESSION_ADMIN_COOKIE',
+        Str::slug(env('APP_NAME', 'laravel'), '_').'_admin_session'
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
     | Session Cookie Path
     |--------------------------------------------------------------------------
     |

@@ -25,7 +25,7 @@ class RujukanController extends Controller
         'tanggal_lahir' => 'required|date',
         'nik' => 'required|string',
         'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
-        'tanggal_pemeriksaan' => 'required|after_or_equal:today',
+        'jadwal_pemeriksaan' => 'required|after_or_equal:today',
         'jenis_pemeriksaan' => 'required|string',
         'detail_pemeriksaan' => 'required|string',
         'no_telepon' => 'required|string',

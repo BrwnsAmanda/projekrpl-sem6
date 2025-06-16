@@ -11,18 +11,20 @@ class Reservasi extends Model
 
     protected $fillable = [
         'nama',
-        'jenis_kelamin',
-        'alamat',
         'nik',
         'telepon',
         'tanggal_lahir',
         'jadwal_pemeriksaan',
         'jenis_pemeriksaan',
         'detail_pemeriksaan',
-        'punya_rujukan',
-        'surat_rujukan_path',
+        'rujukan',
+        'surat_rujukan',
         'user_id',
-        'status'
+        'hasil_pemeriksaan',
+        'jenis_kelamin',
+        'alamat',
+        'harga',
+        'status',
     ];
 
     public function user()
@@ -34,4 +36,18 @@ class Reservasi extends Model
     {
         return $this->hasMany(Riwayat::class, 'reservasi_id');
     }
+
+    public function getHargaAttribute()
+    {
+        return \App\Models\PemeriksaanHarga::getHarga($this->jenis_pemeriksaan, $this->detail_pemeriksaan) ?? 0;
+    }
+
+    // Reservasi.php
+protected static function booted()
+{
+    static::deleting(function ($reservasi) {
+        $reservasi->riwayats()->delete();
+    });
+}
+
 }
