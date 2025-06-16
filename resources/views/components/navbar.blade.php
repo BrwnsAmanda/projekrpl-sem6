@@ -116,6 +116,17 @@
                                 Riwayat Rujukan
                             </div>
                         </a>
+                        {{-- Tambahkan Tautan Edit Profil untuk Mitra/Dokter --}}
+                        <a href="{{ route('profile.edit') }}"
+                            class="block px-4 py-2 text-gray-800 hover:bg-primary hover:text-black">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                                Edit Profil
+                            </div>
+                        </a>
                         {{-- Tautan Logout (Dari kedua branch) --}}
                         <form method="POST" action="{{ route('logout') }}" class="block">
                             @csrf
@@ -200,6 +211,9 @@
                     {{-- Tambahkan Riwayat Rujukan di sini untuk mobile mitra --}}
                     <li><a href="{{ route('mitra.rujukan.riwayat') }}"
                             class="block px-6 py-3 hover:bg-yellow-700 hover:text-white">Riwayat Rujukan</a></li>
+                    {{-- Tambahkan Tautan Edit Profil untuk Mitra/Dokter Mobile --}}
+                    <li><a href="{{ route('profile.edit') }}"
+                            class="block px-6 py-3 hover:bg-yellow-700 hover:text-white">Edit Profil</a></li>
                 @endif {{-- End of role-based links --}}
 
                 {{-- Tautan Logout di Mobile Menu (selalu tampil untuk user login) --}}

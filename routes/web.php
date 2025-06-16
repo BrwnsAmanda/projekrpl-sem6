@@ -8,7 +8,7 @@ use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\ReservasiController;
 use App\Http\Controllers\RujukanController; // Diimpor dari main
 use App\Http\Controllers\RiwayatController; // Diimpor dari main
-use App\Http\Controllers\ProfileController; // Diimpor dari miexed2
+use App\Http\Controllers\Auth\ProfileController; // Corrected import path
 
 /*
 |--------------------------------------------------------------------------
