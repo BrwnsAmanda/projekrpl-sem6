@@ -1,38 +1,44 @@
-<!-- resources/views/auth/register.blade.php -->
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Daftar - Laboratorium Prodifa</title>
     @vite('resources/css/app.css')
 </head>
+
 <body class="bg-cream font-sans">
-    <a href="{{ route('home') }}" class="absolute top-4 left-4 text-gray-600 hover:text-secondary flex items-center gap-1">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-             viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M15 19l-7-7 7-7" />
+
+    <a href="{{ route('home') }}"
+        class="absolute top-4 left-4 text-gray-600 hover:text-secondary flex items-center gap-1 text-sm z-10">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
-        <span class="text-sm">Kembali ke Beranda</span>
+        <span>Kembali ke Beranda</span>
     </a>
+
     <div class="min-h-screen grid grid-cols-1 md:grid-cols-2">
-        <!-- Kiri: Form Daftar -->
-        <div class="flex flex-col justify-center items-center p-6 md:p-12 bg-cream">
-            <div class="w-full max-w-md bg-white rounded-xl shadow-md p-8">
-                <h2 class="text-2xl font-bold text-center text-black mb-2">Daftar Akun Baru</h2>
-                <p class="text-center text-gray-600 mb-6">Silakan isi data diri Anda untuk membuat akun.</p>
+        <!-- Form Kiri -->
+        <div class="flex flex-col justify-center items-center p-6 sm:p-10 md:p-12">
+            <div class="w-full max-w-md bg-white rounded-xl shadow-md p-6 sm:p-8">
+                <h2 class="text-xl sm:text-2xl font-bold text-center text-black mb-2">Daftar Akun Baru</h2>
+                <p class="text-center text-gray-600 mb-6 text-sm sm:text-base">Silakan isi data diri Anda untuk membuat
+                    akun.</p>
 
                 <!-- Tombol Google -->
                 <div class="flex justify-center mb-6">
-                    <button class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-black hover:bg-gray-100">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-black hover:bg-gray-100 text-sm sm:text-base">
                         <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="h-5 w-5">
                         <span>Daftar dengan Google</span>
                     </button>
                 </div>
 
-                <div class="flex items-center mb-4">
+                <div class="flex items-center mb-4 text-sm">
                     <hr class="flex-grow border-gray-300">
-                    <span class="mx-3 text-gray-500 text-sm">atau daftar dengan email</span>
+                    <span class="mx-3 text-gray-500">atau daftar dengan email</span>
                     <hr class="flex-grow border-gray-300">
                 </div>
 
@@ -41,27 +47,28 @@
 
                     <div>
                         <label for="name" class="block text-sm font-semibold mb-1">Nama Lengkap</label>
-                        <input type="text" id="name" name="name" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-secondary">
+                        <input type="text" id="name" name="name" required
+                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-secondary">
                     </div>
 
                     <div>
                         <label for="phone" class="block text-sm font-semibold mb-1">Nomor Telepon</label>
-                        <input type="text" id="phone" name="phone" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-secondary">
+                        <input type="text" id="phone" name="phone" required
+                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-secondary">
                     </div>
 
                     <div>
                         <label for="email" class="block text-sm font-semibold mb-1">Email</label>
-                        <input type="email" id="email" name="email" required class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-secondary">
+                        <input type="email" id="email" name="email" required
+                            class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-secondary">
                     </div>
 
                     <div class="relative">
                         <label for="password" class="block text-sm font-semibold mb-1">Kata Sandi</label>
-                        <input type="password" id="password" name="password"
-                            required
+                        <input type="password" id="password" name="password" required
                             class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-secondary pr-10">
-
-                        {{-- ikon mata di password --}}
-                        <button type="button" onclick="togglePassword()" class="absolute right-3 top-9 text-gray-500 hover:text-gray-700">
+                        <button type="button" onclick="togglePassword()"
+                            class="absolute right-3 top-9 text-gray-500 hover:text-gray-700">
                             <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -72,9 +79,8 @@
                         </button>
                     </div>
 
-
-
-                    <button type="submit" class="w-full py-2 rounded-md bg-primary text-black font-bold hover:bg-yellow-500">
+                    <button type="submit"
+                        class="w-full py-2 rounded-md bg-primary text-black font-bold hover:bg-yellow-500 transition">
                         Daftar
                     </button>
                 </form>
@@ -85,11 +91,13 @@
             </div>
         </div>
 
-        <!-- Kanan: Gambar -->
-        <div class="hidden md:block relative bg-cover bg-center" style="background-image: url('{{ asset('images/registerbg.jpeg') }}');">
+        <!-- Gambar Kanan untuk Desktop -->
+        <div class="hidden md:block relative bg-cover bg-center"
+            style="background-image: url('{{ asset('images/registerbg.jpeg') }}');">
             <div class="absolute inset-0 bg-black/40"></div>
         </div>
     </div>
+
     <script>
         function togglePassword() {
             const passwordInput = document.getElementById("password");
@@ -104,15 +112,16 @@
                           d="M3 3l18 18" />`;
             } else {
                 passwordInput.type = "password";
-                eyeIcon.innerHTML = `
+                eyeIcon.innerHTML =
+                    `
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />`;
             }
         }
-        </script>
-
+    </script>
 
 </body>
+
 </html>

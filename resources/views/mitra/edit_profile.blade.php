@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Edit Profil Mitra</title>
     @vite('resources/css/app.css')
 </head>
@@ -10,9 +11,9 @@
 <body class="bg-cream font-sans font-poppins">
     @include('components.navbar')
 
-    <div class="max-w-2xl mx-auto py-10 px-4">
-        <div class="bg-white rounded-xl shadow-lg p-8">
-            <h2 class="text-2xl font-bold mb-6 text-primary">Edit Profil Mitra</h2>
+    <div class="max-w-2xl mx-auto py-6 px-4 sm:px-6 md:px-8">
+        <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8">
+            <h2 class="text-xl sm:text-2xl font-bold mb-6 text-primary">Edit Profil Mitra</h2>
 
             @if (session('success'))
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4"
@@ -78,7 +79,8 @@
 
                 <hr class="my-6 border-gray-200">
 
-                <h3 class="text-lg font-semibold mb-4">Ubah Password</h3>
+                <h3 class="text-base sm:text-lg font-semibold mb-4">Ubah Password</h3>
+
                 <div>
                     <label for="current_password" class="block font-semibold text-sm mb-1">Password Saat Ini</label>
                     <input type="password" id="current_password" name="current_password"
@@ -106,7 +108,7 @@
 
                 <div class="flex justify-end">
                     <button type="button" id="openConfirmModal"
-                        class="bg-primary text-black font-semibold px-6 py-2 rounded hover:bg-yellow-100 transition">
+                        class="bg-primary text-black text-sm sm:text-base font-semibold px-6 py-2 rounded hover:bg-yellow-100 transition">
                         Simpan Perubahan
                     </button>
                 </div>
@@ -116,7 +118,7 @@
 
     <!-- Modal Konfirmasi -->
     <div id="confirmModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-lg p-6 shadow-xl max-w-sm w-full mx-4">
+        <div class="bg-white rounded-lg p-6 shadow-xl w-full max-w-sm sm:max-w-md mx-4">
             <h3 class="text-lg font-bold mb-4 text-gray-900">Konfirmasi Perubahan</h3>
             <p class="text-gray-700 mb-6">Apakah Anda yakin ingin menyimpan perubahan pada profil Anda?</p>
             <div class="flex justify-end gap-3">
@@ -150,14 +152,12 @@
                 profileForm.submit();
             });
 
-            // Close modal if clicked outside
             confirmModal.addEventListener('click', function(event) {
                 if (event.target === confirmModal) {
                     confirmModal.classList.add('hidden');
                 }
             });
 
-            // Close modal with Escape key
             document.addEventListener('keydown', function(event) {
                 if (event.key === 'Escape' && !confirmModal.classList.contains('hidden')) {
                     confirmModal.classList.add('hidden');
