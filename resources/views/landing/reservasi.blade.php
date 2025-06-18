@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Reservasi Pemeriksaan</title>
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
@@ -38,7 +39,7 @@
         </div>
     </div>
 
-    <div class="max-w-5xl mx-auto bg-white p-10 rounded-xl shadow-lg mb-16 border-l-8 border-primary">
+    <div class="max-w-5xl mx-auto bg-white p-4 sm:p-10 rounded-xl shadow-lg mb-16 border-l-8 border-primary">
         <h2 class="text-2xl font-bold mb-8 text-primary flex items-center gap-2">
             <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -48,12 +49,12 @@
         </h2>
         {{-- Menggabungkan form tag --}}
         <form id="form-reservasi" action="{{ route('reservasi.store') }}" method="POST" enctype="multipart/form-data"
-            class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
             @csrf
 
             {{-- Display Validation Errors --}}
             @if ($errors->any())
-                <div class="md:col-span-2 mb-4">
+                <div class="sm:col-span-2 mb-4">
                     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
                         role="alert">
                         <strong class="font-bold">Oops!</strong>
@@ -69,7 +70,7 @@
 
             {{-- Display Success Message --}}
             @if (session('success'))
-                <div class="md:col-span-2 mb-4">
+                <div class="sm:col-span-2 mb-4">
                     <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
                         role="alert">
                         <strong class="font-bold">Sukses!</strong>
@@ -187,7 +188,7 @@
                 </div>
                 <input type="hidden" name="rujukan" id="rujukan"> {{-- Pastikan ID ini benar --}}
             </div>
-            <div id="upload-rujukan" class="md:col-span-2 hidden">
+            <div id="upload-rujukan" class="sm:col-span-2 hidden">
                 <label for="surat_rujukan" class="block text-sm font-semibold text-gray-700 mb-2">Unggah Surat
                     Rujukan</label>
                 <input type="file" id="surat_rujukan" name="surat_rujukan"
@@ -201,10 +202,10 @@
                     </div>
                 </div>
             </div>
-            <div class="md:col-span-2 flex justify-center pt-4">
+            <div class="sm:col-span-2 flex flex-col sm:flex-row justify-center pt-4 gap-4">
                 {{-- Tombol submit, akan memicu modal konfirmasi --}}
                 <button type="submit"
-                    class="bg-primary hover:bg-yellow-500 text-black font-bold px-8 py-3 rounded-lg shadow-lg transition-all duration-300">
+                    class="w-full sm:w-auto bg-primary hover:bg-yellow-500 text-black font-bold px-8 py-3 rounded-lg shadow-lg transition-all duration-300">
                     Ajukan Reservasi
                 </button>
             </div>

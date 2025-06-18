@@ -232,12 +232,17 @@
     </div>
 </nav>
 
-{{-- Script untuk toggle mobile menu --}}
 <script>
-    document.getElementById('hamburger').onclick = function() {
-        document.getElementById('navbar-menu').classList.toggle('hidden');
-        document.getElementById('mobile-menu').classList.toggle('hidden');
-        document.getElementById('hamburger-icon').classList.toggle('hidden');
-        document.getElementById('close-icon').classList.toggle('hidden');
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        hamburger.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+    });
 </script>
