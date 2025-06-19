@@ -112,13 +112,21 @@ class RujukanResource extends Resource
                 ->label('Catatan Dokter')
                 ->nullable(),
 
-            FileUpload::make('file_rujukan')
-                ->label('File Rujukan')
-                ->directory('rujukan')
-                ->visibility('public')
-                ->disk('s3')
-                ->preserveFilenames()
-                ->nullable(),
+                FileUpload::make('file_rujukan')
+    ->label('File Rujukan')
+    ->directory('rujukan')
+    ->disk('s3')
+    ->downloadable()
+    ->visibility('public')
+    ->preserveFilenames()
+    ->saveUploadedFileUsing(function ($file) {
+        return $file->storeAs(
+            'rujukan',
+            $file->getClientOriginalName(),
+            's3'
+        );
+    })
+    ->nullable(),
         ]);
     }
 
