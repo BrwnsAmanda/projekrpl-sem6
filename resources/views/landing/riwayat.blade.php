@@ -67,11 +67,10 @@
                             </button>
                             {{-- Tombol Unduh Hasil Pemeriksaan (hanya tampil jika ada file) --}}
                             {{-- Menggunakan kondisi dan link dari miexed2 --}}
-                            @if ($riwayat->hasil_file)
-                                <a href="{{ asset('storage/' . $riwayat->hasil_file) }}" target="_blank"
-                                    class="inline-block bg-secondary text-white px-4 py-2 rounded font-semibold hover:bg-secondary/80 shadow w-full md:w-auto text-center">
-                                    Unduh Hasil Pemeriksaan (PDF)
-                                </a>
+                            @if (isset($riwayat->reservasi) && $riwayat->reservasi->hasil_pemeriksaan)
+                                <a href="{{ \Illuminate\Support\Facades\Storage::disk('s3')->temporaryUrl($riwayat->reservasi->hasil_pemeriksaan, now()->addMinutes(10)) }}" target="_blank" class="inline-block bg-secondary text-white px-4 py-3 rounded font-semibold hover:bg-secondary/80 shadow w-full md:w-auto text-center">
+        Lihat Hasil Pemeriksaan
+    </a>
                             @endif
                         </div>
                     </div>

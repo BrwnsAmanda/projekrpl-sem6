@@ -79,9 +79,8 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                     {{ $rujukan->detail_pemeriksaan }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                    @if ($rujukan->surat_rujukan)
-                                        <a href="{{ Storage::url($rujukan->surat_rujukan) }}" target="_blank"
-                                            class="text-primary hover:underline">Lihat</a>
+                                    @if ($rujukan->file_rujukan)
+                                        <a href="{{ Storage::disk('s3')->temporaryUrl($rujukan->file_rujukan, now()->addMinutes(10)) }}" target="_blank" class="text-primary hover:underline">Lihat</a>
                                     @else
                                         Tidak ada
                                     @endif

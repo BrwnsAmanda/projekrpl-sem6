@@ -197,8 +197,8 @@
                     <li><a href="{{ route('reservasi') }}"
                             class="block px-6 py-3 hover:bg-yellow-700 hover:text-white">Reservasi</a></li>
                     {{-- Remove Riwayat link from mobile navbar for pasien/user --}}
-                    {{-- <li><a href="{{ route('riwayat') }}"
-                            class="block px-6 py-3 hover:bg-yellow-700 hover:text-white">Riwayat</a></li> --}}
+                    <li><a href="{{ route('riwayat') }}"
+                            class="block px-6 py-3 hover:bg-yellow-700 hover:text-white">Riwayat</a></li>
                     <li><a href="{{ route('profile.edit') }}"
                             class="block px-6 py-3 hover:bg-yellow-700 hover:text-white">Edit Profil</a></li>
                 @elseif(Auth::user()->role === 'mitra' || Auth::user()->role === 'dokter')

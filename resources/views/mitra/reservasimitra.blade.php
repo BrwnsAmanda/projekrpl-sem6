@@ -135,9 +135,9 @@
             </div>
 
             <div id="upload-rujukan" class="md:col-span-2">
-                <label for="surat_rujukan" class="block text-sm font-semibold text-gray-700 mb-2">Unggah Surat
+                <label for="file_rujukan" class="block text-sm font-semibold text-gray-700 mb-2">Unggah Surat
                     Rujukan</label>
-                <input type="file" id="surat_rujukan" name="surat_rujukan"
+                <input type="file" id="file_rujukan" name="file_rujukan"
                     class="w-full border border-gray-300 rounded-md px-4 py-2 file:bg-secondary file:text-white"
                     accept=".pdf,image/*" onchange="previewFile(event)" />
                 <div id="preview-container" class="mt-4 hidden">
@@ -305,7 +305,7 @@
 
         // Fungsi untuk menghapus preview file rujukan
         function removePreview() {
-            const fileInput = document.getElementById('surat_rujukan');
+            const fileInput = document.getElementById('file_rujukan');
             const previewContainer = document.getElementById('preview-container');
             fileInput.value = ""; // Mengosongkan input file
             previewContainer.classList.add('hidden');
