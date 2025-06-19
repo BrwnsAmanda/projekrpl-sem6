@@ -11,6 +11,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload\DownlpadableFileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\TextColumn;
@@ -184,12 +185,30 @@ class ReservasiResource extends Resource
             FileUpload::make('surat_rujukan')
                 ->label('Unggah Surat Rujukan')
                 ->directory('rujukan')
+                ->downloadable()
+                ->visibility('public')
+                ->preserveFilenames()
+                ->disk('s3')
                 ->nullable(),
 
-            FileUpload::make('hasil_pemeriksaan')
-                ->label('Upload Hasil Pemeriksaan')
-                ->directory('hasil-pemeriksaan')
-                ->nullable(),
+          FileUpload::make('hasil_pemeriksaan')
+    ->label('Upload Hasil Pemeriksaan')
+    ->directory('hasil_pemeriksaan')
+    ->disk('s3')
+    ->downloadable()
+    ->visibility('public')
+    ->preserveFilenames()
+    ->saveUploadedFileUsing(function ($file) {
+        return $file->storeAs(
+            'hasil_pemeriksaan',
+            $file->getClientOriginalName(),
+            's3'
+        );
+    })
+    ->nullable(),
+
+
+
 
                     ]);
     }
@@ -236,15 +255,17 @@ class ReservasiResource extends Resource
                         'gray' => 'tidak',
                     ]),
 
-                ImageColumn::make('surat_rujukan')
+                TextColumn::make('surat_rujukan')
                     ->label('Surat Rujukan')
-                    ->visibility('visible')
-                    ->circular(),
+                    ->formatStateUsing(fn ($state) => $state ? \Illuminate\Support\Facades\Storage::disk('s3')->url($state) : '-')
+                    ->url(fn ($state) => $state ? \Illuminate\Support\Facades\Storage::disk('s3')->url($state) : null)
+                    ->openUrlInNewTab(),
 
-                ImageColumn::make('hasil_pemeriksaan')
+                TextColumn::make('hasil_pemeriksaan')
                     ->label('Hasil Pemeriksaan')
-                    ->visibility('visible')
-                    ->circular(),
+                    ->formatStateUsing(fn ($state) => $state ? \Illuminate\Support\Facades\Storage::disk('s3')->url($state) : '-')
+                    ->url(fn ($state) => $state ? \Illuminate\Support\Facades\Storage::disk('s3')->url($state) : null)
+                    ->openUrlInNewTab(),
 
                 TextColumn::make('jenis_kelamin')
                     ->label('Jenis Kelamin'),

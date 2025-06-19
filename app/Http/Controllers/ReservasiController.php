@@ -8,6 +8,7 @@ use App\Models\Riwayat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class ReservasiController extends Controller
 {
@@ -24,16 +25,29 @@ class ReservasiController extends Controller
             'jenis_pemeriksaan' => 'required|string',
             'detail_pemeriksaan' => 'required|string',
             'rujukan' => 'required|in:Ya,Tidak',
-            'surat_rujukan' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048'
+            'surat_rujukan' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'hasil_pemeriksaan' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
 
         // Hitung harga pemeriksaan
         $harga = PemeriksaanHarga::getHarga($validated['jenis_pemeriksaan'], $validated['detail_pemeriksaan']);
 
-        // Handle file upload
-        $filePath = null;
+        // Handle file upload surat_rujukan
+        $filePathRujukan = null;
         if ($request->hasFile('surat_rujukan')) {
-            $filePath = $request->file('surat_rujukan')->store('rujukan', 'public');
+            $filePathRujukan = $request->file('surat_rujukan')->store('rujukan', 's3');
+            Log::info('Upload surat_rujukan success: ' . $filePathRujukan);
+        } else {
+            Log::warning('No surat_rujukan file uploaded.');
+        }
+
+        // Handle file upload hasil_pemeriksaan
+        $filePathHasil = null;
+        if ($request->hasFile('hasil_pemeriksaan')) {
+            $filePathHasil = $request->file('hasil_pemeriksaan')->store('hasil_pemeriksaan', 's3');
+            Log::info('Upload hasil_pemeriksaan success: ' . $filePathHasil);
+        } else {
+            Log::warning('No hasil_pemeriksaan file uploaded.');
         }
 
         // Buat reservasi
@@ -48,7 +62,7 @@ class ReservasiController extends Controller
             'jenis_pemeriksaan' => $validated['jenis_pemeriksaan'],
             'detail_pemeriksaan' => $validated['detail_pemeriksaan'],
             'rujukan' => $validated['rujukan'],
-            'surat_rujukan' => $filePath,
+            'surat_rujukan' => $filePathRujukan,
             'user_id' => Auth::check() ? Auth::id() : null,
             'harga' => $harga ?? 0,
             'status' => 'Menunggu Pembayaran'
@@ -60,7 +74,7 @@ class ReservasiController extends Controller
             'harga' => $harga ?? 0,
             'status' => 'Belum Dibayar',
             'invoice_number' => 'INV-' . strtoupper(uniqid()),
-            'hasil_pemeriksaan' => null,
+            'hasil_pemeriksaan' => $filePathHasil,
         ]);
 
         return redirect()->route('reservasi')->with('success', 'Reservasi berhasil dibuat.');
