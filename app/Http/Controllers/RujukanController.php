@@ -39,8 +39,9 @@ class RujukanController extends Controller
 
     $validated = $validator->validated();
 
+    $filepath = null;
     if ($request->hasFile('file_rujukan')) {
-        $validated['file_rujukan'] = $request->file('file_rujukan')->store('rujukan_files', 'public');
+        $filepath = $request->file('file_rujukan')->store('rujukan', 's3');
     }
 
     $validated['user_id'] = auth()->check() ? auth()->id() : null;

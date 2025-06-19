@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Columns;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
@@ -114,6 +115,9 @@ class RujukanResource extends Resource
             FileUpload::make('file_rujukan')
                 ->label('File Rujukan')
                 ->directory('rujukan')
+                ->visibility('public')
+                ->disk('s3')
+                ->preserveFilenames()
                 ->nullable(),
         ]);
     }
@@ -133,7 +137,10 @@ class RujukanResource extends Resource
                 TextColumn::make('detail_pemeriksaan')->label('Detail Pemeriksaan')->limit(50),
                 TextColumn::make('no_telepon')->label('No. Telepon')->searchable(),
                 TextColumn::make('catatan_dokter')->label('Catatan Dokter')->limit(50),
-                TextColumn::make('file_rujukan')->label('File Rujukan')->limit(50),
+                TextColumn::make('file_rujukan')->label('File Rujukan')
+                    ->formatStateUsing(fn ($state) => $state ? \Illuminate\Support\Facades\Storage::disk('s3')->url($state) : '-')
+                    ->url(fn ($state) => $state ? \Illuminate\Support\Facades\Storage::disk('s3')->url($state) : null)
+                    ->openUrlInNewTab(),
             ])
             ->defaultSort('jadwal_pemeriksaan', 'desc')
             ->searchable()
